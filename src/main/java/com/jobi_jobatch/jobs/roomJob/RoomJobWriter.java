@@ -14,15 +14,11 @@ public class RoomJobWriter {
     private RoomRepository roomRepository;
     @Bean
     public ItemWriter<Room> importRoomsWriter() {
-        return new ItemWriter<Room>() {
-            @Override
-            public void write(List<? extends Room> rooms) throws Exception {
-                List<Room> roomsToSave = ((List<Room>)rooms.get(0));
-                for(Room room : roomsToSave) {
-                    System.err.println("Data to WRITE : "+room.toString());
-                }
-                roomRepository.saveAll(roomsToSave);
+        return rooms -> {
+            for(Room room : rooms) {
+                System.err.println("Data to WRITE : "+room.toString());
             }
+            roomRepository.saveAll(rooms);
         };
     }
 }

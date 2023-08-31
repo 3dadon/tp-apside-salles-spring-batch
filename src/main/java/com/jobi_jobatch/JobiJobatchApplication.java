@@ -11,5 +11,6 @@ public class JobiJobatchApplication {
 
 	public static void main(String[] args) {
 		System.exit(SpringApplication.exit(SpringApplication.run(JobiJobatchApplication.class, args)));
+//		SpringApplication.run(JobiJobatchApplication.class, args);
 	}
 }

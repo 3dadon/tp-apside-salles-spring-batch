@@ -20,21 +20,19 @@ public class JobiGgConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job jobiGgJob(Step printGgStep) {
+    public Job jobiGgJob(Step jobiGgStep) {
         return jobBuilderFactory
-                .get("jobiBgJob")
-                .start(printGgStep)
+                .get("jobiGgJob")
+                .start(jobiGgStep)
                 .incrementer(new RunIdIncrementer())
                 .build();
     }
 
     @Bean
-    public Step printGgStep(ItemReader<String> jobiGgReader, ItemWriter<String> jobiGgWriter) {
+    public Step jobiGgStep(ItemReader<String> jobiGgReader, ItemWriter<String> jobiGgWriter) {
         return stepBuilderFactory
-                .get("printHelloWorld")
-                .<String, String>chunk(1)
-                .reader(jobiGgReader)
-                .writer(jobiGgWriter)
+                .get("jobiGgStep")
+                .tasklet(new JobiGgTasklet())
                 .build();
     }
 }

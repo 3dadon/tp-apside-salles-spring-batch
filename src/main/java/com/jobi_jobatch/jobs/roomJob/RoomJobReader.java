@@ -7,6 +7,7 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class RoomJobReader implements ItemReader<List<Room>>, StepExecutionListe
     private RoomService roomService;
 
     private StepExecution stepExecution;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public List<Room> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
